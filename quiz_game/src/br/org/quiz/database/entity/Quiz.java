@@ -1,0 +1,58 @@
+package br.org.quiz.database.entity;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+import java.util.Date;
+
+
+/**
+ * The persistent class for the quiz database table.
+ * 
+ */
+@Entity
+@Table(name="quiz",schema="quiz")
+public class Quiz implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@Column(name="id_quiz")
+	private Integer idQuiz;
+
+    @Temporal( TemporalType.DATE)
+	@Column(name="data_quiz")
+	private Date dataQuiz;
+
+	//bi-directional many-to-one association to Player
+    @ManyToOne
+	@JoinColumn(name="ref_jogador")
+	private Player player;
+
+    public Quiz() {
+    }
+
+	public Integer getIdQuiz() {
+		return this.idQuiz;
+	}
+
+	public void setIdQuiz(Integer idQuiz) {
+		this.idQuiz = idQuiz;
+	}
+
+	public Date getDataQuiz() {
+		return this.dataQuiz;
+	}
+
+	public void setDataQuiz(Date dataQuiz) {
+		this.dataQuiz = dataQuiz;
+	}
+
+	public Player getPlayer() {
+		return this.player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+	
+}
