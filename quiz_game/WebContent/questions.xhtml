@@ -25,14 +25,23 @@
 					<h:outputText value="#{q.descricao}" />	
 				</p:column>
 				
+				<p:column headerText="Respostas:">
+					<p:dataList value="#{q.answers}" var="a">
+						<h:outputText value="#{a.descricao}" />
+					</p:dataList>	
+				</p:column>
+				
+				
 				<p:column headerText="Ações">
 					
-					<p:commandLink value="Editar">
-						<f:setPropertyActionListener target="#{questionController.backingBean.question}" value="q" />
+					<p:commandLink >
+						<h:graphicImage library="images" name="edit-icon.png" />
+						<f:setPropertyActionListener target="#{questionController.backingBean.question}" value="#{q}" />
 					</p:commandLink>
 					
-					<p:commandLink value="Deletar">
-						<f:setPropertyActionListener target="#{questionController.backingBean.question}" value="q" />
+					<p:commandLink action="#{questionController.delete}" ajax="true" update="search-results">
+						<h:graphicImage library="images" name="delete-icon.png" />
+						<f:setPropertyActionListener target="#{questionController.backingBean.question}" value="#{q}" />
 					</p:commandLink>					
 				</p:column>
 			</p:dataTable>

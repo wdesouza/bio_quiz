@@ -33,4 +33,11 @@ public class QuestionController {
 		List<Question> questions = facade.findQuestionsByDescription( backingBean.getSearchExpression() );
 		backingBean.setSearchResults(questions);
 	}
+	
+	public void delete() {
+		facade.delete( backingBean.getQuestion() );
+		search();
+	}
+	
+	
 }
