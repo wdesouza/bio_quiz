@@ -1,11 +1,37 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"> 
-
-<h:head></h:head> 
-<body> 
-Helolololo tra la la la!
-</body> 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+<f:view>
+	<h:head></h:head>
+	<body style="background-color: #FAFAF4">
+		<!-- import header -->
+		<p:panel style="border:none;">
+			Descrição do Jogo/Quiz
+		</p:panel>
+		<h:form>
+			<p:panel style="margin:auto;width:15em;">
+				<h:panelGrid columns="1">
+					<h:outputLabel value="Nome" />
+					<p:inputText required="true"/>
+					<h:outputLabel value="Email" />
+					<p:inputText required="true"/>
+					<p:commandButton ajax="false" value="Jogar"
+						style="margin-left:4em;" />
+				</h:panelGrid>
+			</p:panel>
+			<p:panel style="margin:auto;border:none;width:12em;">
+				<p:commandLink ajax="false" value="Tela de Pontuação" />
+			</p:panel>
+			<p:panel style="position:absolute;bottom:0px;left:0px;border:none;">
+				<p:commandLink ajax="false" value="Equipe" />
+			</p:panel>
+			<p:panel style="position:absolute;bottom:0px;right:0px;border:none;">
+				<p:commandLink ajax="false" value="Administração" />
+			</p:panel>
+		</h:form>
+	</body>
+</f:view>
 </html>
