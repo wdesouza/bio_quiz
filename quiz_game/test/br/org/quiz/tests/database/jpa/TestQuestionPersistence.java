@@ -1,5 +1,7 @@
 package br.org.quiz.tests.database.jpa;
 
+import java.util.List;
+
 import junit.framework.Assert;
 
 import org.junit.BeforeClass;
@@ -38,6 +40,26 @@ public class TestQuestionPersistence {
 		Integer id = facade.getQuestionMaxId();
 		facade.insert( mockQuestion() );
 		assertThatQuestionHasBeenInserted(id);
+	}
+
+	@Test
+	public void testDeleteQuestion() {
+		
+		Question toDelete = findSomeQuestion();
+		Integer toDeleteId = toDelete.getIdQuestao();
+		facade.delete(toDelete);
+		Assert.assertNull(facade.find(toDeleteId));
+	}
+	
+	private Question findSomeQuestion() {
+		List<Question> allQuestions = findAllQuestions();
+		Assert.assertFalse("Não há questões cadastradas.", allQuestions.isEmpty() );
+		return allQuestions.get(0);
+	}
+	
+	
+	private List<Question> findAllQuestions() {
+		return facade.findQuestionsByDescription("");
 	}
 
 	private void assertThatQuestionHasBeenInserted(Integer id) {

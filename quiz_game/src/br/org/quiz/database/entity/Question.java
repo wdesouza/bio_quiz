@@ -13,6 +13,9 @@ import java.util.List;
  */
 @Entity
 @Table(name="questao",schema="quiz")
+@NamedQueries({
+	@NamedQuery(name="Question.search",query="SELECT q FROM Question q WHERE LOWER(q.descricao) LIKE ?1")
+})
 public class Question implements Serializable {
 	private static final long serialVersionUID = 1L;
 
