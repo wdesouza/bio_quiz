@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="quiz" transaction-type="RESOURCE_LOCAL">
+		<class>br.org.quiz.database.entity.Choice</class>
+		<class>br.org.quiz.database.entity.Player</class>
+		<class>br.org.quiz.database.entity.Question</class>
+		<class>br.org.quiz.database.entity.Quiz</class>
+		<class>br.org.quiz.database.entity.QuestionMapping</class>
+		<class>br.org.quiz.database.entity.QuestionMappingKey</class>
+	
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/quiz_game"/>
+			<property name="javax.persistence.jdbc.user" value="postgres"/>
+			<property name="javax.persistence.jdbc.password" value="postgres"/>
+		</properties>
+	</persistence-unit>
+</persistence>
