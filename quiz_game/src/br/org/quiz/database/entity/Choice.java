@@ -14,6 +14,8 @@ public class Choice implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(allocationSize=1,name="choiceSequenceGen",sequenceName="quiz.seq_alternativa")
+	@GeneratedValue(generator="choiceSequenceGen")
 	@Column(name="id_alternativa")
 	private Integer idAlternativa;
 
@@ -73,5 +75,26 @@ public class Choice implements Serializable {
 	public void setQuestion(Question question) {
 		this.question = question;
 	}
+
+	public Integer getRefQuestao() {
+		return refQuestao;
+	}
+
+	public void setRefQuestao(Integer refQuestao) {
+		this.refQuestao = refQuestao;
+	}
+	
+	public boolean isValidAnswer() {
+		return this.getVerdade() == 1;
+	}
+
+	@Override
+	public String toString() {
+		return String
+				.format("Choice [idAlternativa=%s, comentario=%s, descricao=%s, verdade=%s, refQuestao=%s]\n",
+						idAlternativa, comentario, descricao, verdade,
+						refQuestao);
+	}
+	
 	
 }

@@ -42,21 +42,25 @@ public class DAOTransactionsImp<T> implements DAOTransactions<T>{
 	
 	@Override
 	public void insert(T object) {
+		initTransaction();
 		getManager().persist(object);
+		commit();
 	}
 	
 	@Override
 	public void update(T object) {
+		initTransaction();
 		getManager().merge(object);
+		commit();
 	}
 
 	@Override
 	public void delete(T object) {
-		
+		initTransaction();
 		getManager().merge(object);
 		if(object != null)
 			getManager().remove(object);
-		
+		commit();
 	}
 	
 	private EntityManager getManager() {

@@ -2,6 +2,8 @@ package br.org.quiz.database.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,10 +23,11 @@ public class Question implements Serializable {
 	private String descricao;
 
 	//bi-directional many-to-one association to Choice
-	@OneToMany(mappedBy="question",cascade={CascadeType.PERSIST,CascadeType.REMOVE})
+	@OneToMany(mappedBy="question",cascade={CascadeType.PERSIST,CascadeType.REMOVE},fetch=FetchType.EAGER)
 	private List<Choice> choices;
 
     public Question() {
+    	choices = new ArrayList<Choice>();
     }
 
 	public Integer getIdQuestao() {
@@ -33,6 +36,14 @@ public class Question implements Serializable {
 
 	public void setIdQuestao(Integer idQuestao) {
 		this.idQuestao = idQuestao;
+		distributeIdOverChoices();
+	}
+
+	private void distributeIdOverChoices() {
+		if(choices != null) {
+			for(Choice c : choices) 
+				c.setRefQuestao(idQuestao);
+		}
 	}
 
 	public String getDescricao() {
@@ -50,5 +61,30 @@ public class Question implements Serializable {
 	public void setChoices(List<Choice> choices) {
 		this.choices = choices;
 	}
+	
+	public void addChoice(Choice c) {
+		this.choices.add(c);
+	}
+	
+	public boolean hasAnswer() {
+		
+		if(choices == null)
+			return false;
+		
+		for(Choice c : choices) {
+			if(c.isValidAnswer())
+				return true;
+		}
+		
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"Question [idQuestao=%s, descricao=%s, \nchoices=%s]\n", idQuestao,
+				descricao, choices);
+	}
+	
 	
 }
