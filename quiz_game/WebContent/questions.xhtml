@@ -5,7 +5,9 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.prime.com.tr/ui">
 <f:view>
-	<h:head></h:head>
+	<h:head>
+		<h:outputStylesheet name="style.css" library="style"/>
+	</h:head>
 	<h:body>
 		<h:form>
 			<h:panelGrid columns="2">
@@ -25,6 +27,13 @@
 				
 				<p:column headerText="Ações">
 					
+					<p:commandLink value="Editar">
+						<f:setPropertyActionListener target="#{questionController.backingBean.question}" value="q" />
+					</p:commandLink>
+					
+					<p:commandLink value="Deletar">
+						<f:setPropertyActionListener target="#{questionController.backingBean.question}" value="q" />
+					</p:commandLink>					
 				</p:column>
 			</p:dataTable>
 		</h:form>

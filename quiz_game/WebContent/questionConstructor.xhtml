@@ -9,12 +9,12 @@
 <h:body> 
 	
 	<h:form>
-		<p:dialog modal="true" widgetVar="editPanel">
+		<p:dialog modal="true" widgetVar="editPanel" height="500" width="500">
 			<p:fieldset legend="Criar uma pergunta">
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="1">
 				
-					<h:outputLabel value="Descrição da questão:" />
-					<p:inputTextarea />
+					<h:outputLabel value="Descrição da questão:" /> 
+					<p:inputTextarea autoResize="false" rows="10" cols="100" label="Descrição da questão"/>
 				</h:panelGrid>
 			</p:fieldset>			
 		</p:dialog>		
