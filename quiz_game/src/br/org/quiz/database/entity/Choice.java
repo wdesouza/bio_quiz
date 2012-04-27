@@ -23,9 +23,12 @@ public class Choice implements Serializable {
 
 	private Integer verdade;
 
+	@Column(name="ref_questao")
+	private Integer refQuestao;
+	
 	//bi-directional many-to-one association to Question
     @ManyToOne
-	@JoinColumn(name="ref_questao")
+	@JoinColumn(name="ref_questao",insertable=false,updatable=false)
 	private Question question;
 
     public Choice() {

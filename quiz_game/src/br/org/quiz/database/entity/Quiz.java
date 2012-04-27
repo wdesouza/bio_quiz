@@ -23,6 +23,9 @@ public class Quiz implements Serializable {
 	@Column(name="data_quiz")
 	private Date dataQuiz;
 
+    @Column(name="ref_jogador")
+    private String refJogador;
+    
 	//bi-directional many-to-one association to Player
     @ManyToOne
 	@JoinColumn(name="ref_jogador")
@@ -54,5 +57,15 @@ public class Quiz implements Serializable {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
+
+	public String getRefJogador() {
+		return refJogador;
+	}
+
+	public void setRefJogador(String refJogador) {
+		this.refJogador = refJogador;
+	}
+	
+	
 	
 }

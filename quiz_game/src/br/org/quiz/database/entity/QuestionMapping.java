@@ -21,7 +21,7 @@ public class QuestionMapping implements Serializable {
 
 	//uni-directional one-to-one association to Quiz
 	@OneToOne
-	@JoinColumn(name="ref_quiz")
+	@JoinColumn(name="ref_quiz",insertable=false,updatable=false)
 	private Quiz quiz;
 
 	//uni-directional one-to-one association to Question

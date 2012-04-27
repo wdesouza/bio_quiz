@@ -21,7 +21,7 @@ public class Question implements Serializable {
 	private String descricao;
 
 	//bi-directional many-to-one association to Choice
-	@OneToMany(mappedBy="question")
+	@OneToMany(mappedBy="question",cascade={CascadeType.PERSIST,CascadeType.REMOVE})
 	private List<Choice> choices;
 
     public Question() {
