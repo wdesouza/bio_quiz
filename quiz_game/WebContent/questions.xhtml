@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.prime.com.tr/ui">
+<f:view>
+	<h:head></h:head>
+	<h:body>
+		<h:form>
+			<h:panelGrid columns="2">
+			
+				<p:inputText value="#{questionController.backingBean.searchExpression}" title="Digite aqui a expressão a ser procurada nas perguntas."/>
+				<p:commandButton value="Pesquisar" action="#{questionController.search}" ajax="true" update="search-results"/>
+				<p:commandButton value="Adicionar uma nova pergunta" ajax="true" onclick="editPanel.show();" />
+			</h:panelGrid>
+		</h:form>
+	
+		<h:form id="search-results">
+			<p:dataTable emptyMessage="Não há perguntas contendo a expressão pesquisada." var="q" value="#{questionController.backingBean.searchResults}">          
+				
+				<p:column headerText="Descrição">
+					<h:outputText value="#{q.descricao}" />	
+				</p:column>
+				
+				<p:column headerText="Ações">
+					
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	
+	
+		<ui:include src="/questionConstructor.xhtml"/>
+		
+	</h:body>
+</f:view>
+</html>
