@@ -137,5 +137,17 @@ public class DAOTransactionsImp<T> implements DAOTransactions<T>{
 	@Override
 	public void commit() {
 		getManager().getTransaction().commit();
+	}
+
+
+	@Override
+	public Integer getMax(String fieldName) {
+		
+		String jpql = String.format("SELECT MAX(t.%s) FROM %s t"
+								  , fieldName
+								  , managedClass.getSimpleName());
+		Query query = getManager().createQuery(jpql);
+		Integer result = (Integer) query.getSingleResult();
+		return result == null ? 0 : result;
 	}	
 }

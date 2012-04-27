@@ -106,4 +106,7 @@ public interface DAOTransactions<T> {
 	 * transação corrente, manualmente.
 	 */
 	public void rollback();
+
+
+	public Integer getMax(String string);
 }

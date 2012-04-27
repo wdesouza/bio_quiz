@@ -12,6 +12,10 @@ public class QuestionFacade extends AbstractFacade<Question>{
 	protected DAOTransactions<Question> instantiateDao() {
 		return new DAOTransactionsImp<Question>(Question.class);
 	}
+
+	public Integer getQuestionMaxId() {
+		return dao.getMax("idQuestao");
+	}
 	
 	
 }

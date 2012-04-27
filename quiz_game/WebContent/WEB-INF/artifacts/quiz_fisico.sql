@@ -87,4 +87,15 @@ CREATE  TABLE quiz.quiz_questao (
 );
 
 
+DROP SEQUENCE IF EXISTS quiz.seq_alternativa;
+DROP SEQUENCE IF EXISTS quiz.seq_quiz;
 
+CREATE SEQUENCE quiz.seq_alternativa
+   INCREMENT 1
+   START 1
+   MAXVALUE 999999999;
+
+CREATE SEQUENCE quiz.seq_quiz
+   INCREMENT 1
+   START 1
+   MAXVALUE 999999999;

@@ -28,7 +28,7 @@ public class Quiz implements Serializable {
     
 	//bi-directional many-to-one association to Player
     @ManyToOne
-	@JoinColumn(name="ref_jogador")
+	@JoinColumn(name="ref_jogador",insertable=false, updatable=false)
 	private Player player;
 
     public Quiz() {

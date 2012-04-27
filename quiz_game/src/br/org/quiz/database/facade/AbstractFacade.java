@@ -8,6 +8,10 @@ public abstract class AbstractFacade<T> {
 	
 	protected abstract DAOTransactions<T> instantiateDao();
 	
+	public AbstractFacade() {
+		dao = instantiateDao();
+	}
+	
 	public void insert(T entity) {
 		dao.insert(entity);
 	}
