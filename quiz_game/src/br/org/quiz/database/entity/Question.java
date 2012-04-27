@@ -82,6 +82,33 @@ public class Question implements Serializable {
 		return false;
 	}
 
+	public Choice getAnswer() {
+		
+		if(choices == null || choices.isEmpty())
+			return null;
+		
+		for(Choice c : choices) {
+			if(c.isValidAnswer())
+				return c;
+		}
+		
+		return null;
+	}
+	
+	public List<Choice> getAnswers() {
+		
+		if(choices == null || choices.isEmpty())
+			return null;
+		
+		List<Choice> validAnswers = new ArrayList<Choice>();
+		for(Choice c : choices) {
+			if(c.isValidAnswer())
+				validAnswers.add(c);
+		}
+		
+		return validAnswers;
+	}
+	
 	@Override
 	public String toString() {
 		return String.format(
