@@ -5,33 +5,39 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.prime.com.tr/ui">
 <f:view>
-	<h:head></h:head>
-	<body style="background-color: #FAFAF4">
-		<!-- import header -->
-		<p:panel style="border:none;">
+	<ui:composition template="/template.xhtml">
+		<ui:define name="body">
+			<body style="background-color: #FAFAF4">
+				<p:panel style="border:none;">
 			Descrição do Jogo/Quiz
 		</p:panel>
-		<h:form>
-			<p:panel style="margin:auto;width:15em;">
-				<h:panelGrid columns="1">
-					<h:outputLabel value="Nome" />
-					<p:inputText required="true"/>
-					<h:outputLabel value="Email" />
-					<p:inputText required="true"/>
-					<p:commandButton ajax="false" value="Jogar"
-						style="margin-left:4em;" />
-				</h:panelGrid>
-			</p:panel>
-			<p:panel style="margin:auto;border:none;width:12em;">
-				<p:commandLink ajax="false" value="Tela de Pontuação" />
-			</p:panel>
-			<p:panel style="position:absolute;bottom:0px;left:0px;border:none;">
-				<p:commandLink ajax="false" value="Equipe" />
-			</p:panel>
-			<p:panel style="position:absolute;bottom:0px;right:0px;border:none;">
-				<p:commandLink ajax="false" value="Administração" />
-			</p:panel>
-		</h:form>
-	</body>
+				<h:form>
+					<p:panel style="margin:auto;width:15em;">
+						<h:panelGrid columns="1">
+							<h:outputLabel value="Nome" />
+							<p:inputText required="true"
+								value="#{playerController.player.nome}" />
+							<h:outputLabel value="Email" />
+							<p:inputText required="true"
+								value="#{playerController.player.email}" />
+							<p:commandButton ajax="false" value="Jogar"
+								style="margin-left:4em;" action="#{playerController.play}" />
+						</h:panelGrid>
+					</p:panel>
+					<p:panel
+						style="margin:auto;border:none;width:15em;text-align:center;">
+						<p:commandLink ajax="false" value="Tela de Pontuação" />
+					</p:panel>
+					<p:panel style="position:absolute;bottom:0px;left:0px;border:none;">
+						<p:commandLink ajax="false" value="Equipe" />
+					</p:panel>
+					<p:panel
+						style="position:absolute;bottom:0px;right:0px;border:none;">
+						<p:commandLink ajax="false" value="Administração" />
+					</p:panel>
+				</h:form>
+			</body>
+		</ui:define>
+	</ui:composition>
 </f:view>
 </html>
