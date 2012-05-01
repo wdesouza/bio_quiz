@@ -35,8 +35,12 @@ public class QuestionController {
 	}
 	
 	public void delete() {
-		facade.delete( backingBean.getQuestion() );
-		search();
+		try {
+			facade.delete( backingBean.getQuestion() );
+			search();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	

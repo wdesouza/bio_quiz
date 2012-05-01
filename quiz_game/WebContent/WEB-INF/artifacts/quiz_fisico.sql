@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS quiz.quiz_questao;
+﻿DROP TABLE IF EXISTS quiz.quiz_questao;
 DROP TABLE IF EXISTS quiz.quiz;
 DROP TABLE IF EXISTS quiz.jogador;
 DROP TABLE IF EXISTS quiz.alternativa;
