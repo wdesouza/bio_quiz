@@ -42,8 +42,12 @@ public class TestQuestionPersistence {
 		facade.insert(mockQuestion());
 		assertThatQuestionHasBeenInserted(id);
 	}
-	
+
+<<<<<<< HEAD
+	@Ignore
+=======
 	@Ignore("Deixar o banco com as questoes inseridas")
+>>>>>>> b28c40294e1ea48f3070f7847fab932b470aca56
 	@Test
 	public void testDeleteQuestion() {
 
