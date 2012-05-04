@@ -9,7 +9,27 @@
 	<ui:composition template="/template.xhtml">
 		<ui:define name="body">
 			<body>
-				<p:panel></p:panel>
+				<p:panel>
+					<h:outputText value="Quantidade questoes: " /><h:outputText value="#{quizController.questionCount}" />
+					<h:outputText value="Questoes acertadas: " /><h:outputText value="#{quizController.acertosCount}" />
+				</p:panel>
+				<h:form id="actualQuestion" prependId="false">
+					<p:panel header="Questão #{quizController.questionCount}">
+						<h:outputText value="#{quizController.actualQuestion.descricao}" />
+						<p:dataGrid value="#{quizController.actualQuestion.choices}"
+							var="choice" columns="1">
+							<p:commandButton value="#{choice.descricao}">
+								<f:setPropertyActionListener
+									target="#{quizController.questionMapping.alternativaSelecionada}"
+									value="#{choice.idAlternativa}" />
+							</p:commandButton>
+						</p:dataGrid>
+					</p:panel>
+					<p:panel style="text-align:right;">
+						<p:commandButton value="Próximo" update="actualQuestion"
+							action="#{quizController.nextQuestion}" />
+					</p:panel>
+				</h:form>
 			</body>
 		</ui:define>
 	</ui:composition>

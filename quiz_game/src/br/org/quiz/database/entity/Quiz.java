@@ -32,6 +32,7 @@ public class Quiz implements Serializable {
 	private Player player;
 
     public Quiz() {
+    	this.dataQuiz = new Date();
     }
 
 	public Integer getIdQuiz() {
