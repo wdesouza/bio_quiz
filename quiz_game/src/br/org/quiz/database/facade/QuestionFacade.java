@@ -43,7 +43,7 @@ public class QuestionFacade extends AbstractFacade<Question>{
 
 	private void checkQuestion(Question question) {
 		Preconditions.checkState( question.hasAnswer()
-								, "Não há resposta válida definida " +
-								  "para a pergunta '%s'." );
+								, String.format("Não há resposta válida definida " +
+								  "para a pergunta '%s'.", question.getDescricao()) );
 	}
 }

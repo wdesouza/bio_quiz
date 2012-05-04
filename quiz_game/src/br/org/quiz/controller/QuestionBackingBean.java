@@ -2,6 +2,7 @@ package br.org.quiz.controller;
 
 import java.util.List;
 
+import br.org.quiz.database.entity.Choice;
 import br.org.quiz.database.entity.Question;
 
 public class QuestionBackingBean {
@@ -9,6 +10,11 @@ public class QuestionBackingBean {
 	private String searchExpression;
 	private Question question;
 	private List<Question> searchResults;
+	private Choice choiceToRemove;
+	
+	public QuestionBackingBean() {
+		resetQuestion();
+	} 
 	
 	public Question getQuestion() {
 		return question;
@@ -34,6 +40,21 @@ public class QuestionBackingBean {
 		this.searchExpression = searchExpression;
 	}
 	
+	public boolean isQuestionWithMoreThanOneChoice() {
+		return question.getChoices().size() > 1;
+	}
+
+	public Choice getChoiceToRemove() {
+		return choiceToRemove;
+	}
+
+	public void setChoiceToRemove(Choice choiceToRemove) {
+		this.choiceToRemove = choiceToRemove;
+	}
 	
+	public void resetQuestion() {
+		question = new Question();
+		question.addChoice( new Choice() );
+	}
 }
 

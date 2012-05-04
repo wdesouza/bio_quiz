@@ -43,6 +43,7 @@ public class TestQuestionPersistence {
 		assertThatQuestionHasBeenInserted(id);
 	}
 
+	@Ignore
 	@Test
 	public void testDeleteQuestion() {
 		

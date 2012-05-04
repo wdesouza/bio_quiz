@@ -5,19 +5,58 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.prime.com.tr/ui"> 
 
-<h:head></h:head> 
+<h:head>
+	<style>
+		
+		.left-aligned {
+			width: 100%;
+			text-align: right;
+		}		
+			
+	</style>
+</h:head> 
 <h:body> 
 	
-	<h:form>
-		<p:dialog modal="true" widgetVar="editPanel" height="500" width="500">
+	
+		<p:dialog modal="true" widgetVar="editPanel" height="500" width="800">
+			<h:form id='main-form'>
 			<p:fieldset legend="Criar uma pergunta">
-				<h:panelGrid columns="1">
-				
-					<h:outputLabel value="Descrição da questão:" /> 
-					<p:inputTextarea autoResize="false" rows="10" cols="100" label="Descrição da questão"/>
+				<h:outputLabel value="Descrição da questão:" /> 
+				<h:panelGrid columns="2" cellpadding="30">
+					<p:inputTextarea autoResize="false" rows="10" cols="60" label="Descrição da questão" value="#{questionController.backingBean.question.descricao}"/>
+					<h:graphicImage library="images" name="interrogation.png" />
 				</h:panelGrid>
-			</p:fieldset>			
-		</p:dialog>		
-	</h:form>
+				
+				<p:dataGrid  id="choicesList" value="#{questionController.backingBean.question.choices}" var="choice" columns="1" >
+					<p:column>
+					<h:panelGrid columns="7">	
+						<p:inputTextarea cols="36" rows="2" autoResize="false" id="choice-description" value="#{choice.descricao}" size="50" required="true" requiredMessage="Existem descrições a serem preenchidas." title="Aqui você insere a descrição da alternativa">
+							<f:ajax event="blur"/>
+						</p:inputTextarea>
+						<p:watermark for='choice-description'  value="Descrição da alternativa"/>
+						<h:outputText value="É resposta?" />
+						<h:selectOneMenu value="#{choice.verdade}">
+							<f:selectItem itemLabel="Sim" itemValue="1"/>
+							<f:selectItem itemLabel="Não" itemValue="0"/>
+						</h:selectOneMenu>
+						<p:inputText id="choice-comment" value="#{choice.comentario}" size="30" />
+						<p:watermark for='choice-comment' value="Comentário (opcional)"/>
+						
+						
+					</h:panelGrid>
+					</p:column>
+				</p:dataGrid>
+				<h:panelGrid columns="4" id="add-remove-choices-panel" columnClasses=",,left-aligned">
+					<p:commandLink action="#{questionController.addChoice}" ajax="true" update="add-remove-choices-panel, choicesList">
+						<h:graphicImage library="images" name="add-icon.png" />
+					</p:commandLink>
+					<p:commandLink id="remove-choice-link" action="#{questionController.removeChoice}" ajax="true" update="add-remove-choices-panel, choicesList">
+						<h:graphicImage library="images" name="delete-icon.png" />
+					</p:commandLink>
+					<p:commandButton value="Cadastrar pergunta" action="#{questionController.insert}" ajax="false" />
+				</h:panelGrid>
+			</p:fieldset>	
+			</h:form>		
+		</p:dialog>	
 </h:body> 
 </html>

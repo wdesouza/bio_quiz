@@ -34,6 +34,7 @@ public class Choice implements Serializable {
 	private Question question;
 
     public Choice() {
+    	this.verdade = 0;
     }
 
 	public Integer getIdAlternativa() {

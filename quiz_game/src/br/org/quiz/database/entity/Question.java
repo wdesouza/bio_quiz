@@ -115,6 +115,10 @@ public class Question implements Serializable {
 				"Question [idQuestao=%s, descricao=%s, \nchoices=%s]\n", idQuestao,
 				descricao, choices);
 	}
+
+	public void removeChoice(Choice choiceToRemove) {
+		this.choices.remove(choiceToRemove);
+	}
 	
 	
 }

@@ -10,4 +10,13 @@
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#quiz.xhtml" PATH="/quiz.xhtml"
   SHAPE="160,256,50,25" model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#questions.xhtml" PATH="/questions.xhtml"
+  SHAPE="550,183,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#questions.xhtml:0" NAME="item"
+   PATH="/questions.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="SUCCESS::#questions.xhtml" NAME="output"
+    PATH="/questions.xhtml" TARGET="rules:#questions.xhtml"
+    TITLE="SUCCESS" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
 </PROCESS>

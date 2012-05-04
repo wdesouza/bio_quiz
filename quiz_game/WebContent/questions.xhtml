@@ -10,11 +10,13 @@
 	</h:head>
 	<h:body>
 		<h:form>
-			<h:panelGrid columns="2">
+			<h:panelGrid columns="2" >
 			
-				<p:inputText value="#{questionController.backingBean.searchExpression}" title="Digite aqui a expressão a ser procurada nas perguntas."/>
+				<p:inputText id="search-expression" value="#{questionController.backingBean.searchExpression}" title="Digite aqui a expressão a ser procurada nas perguntas." size="60"/>
+				<p:watermark for="search-expression" value="Procure uma questão pela sua descrição" />
+				 
 				<p:commandButton value="Pesquisar" action="#{questionController.search}" ajax="true" update="search-results"/>
-				<p:commandButton value="Adicionar uma nova pergunta" ajax="true" onclick="editPanel.show();" />
+				<p:commandButton value="Adicionar uma nova pergunta" ajax="true" oncomplete="editPanel.show();" action="#{questionController.backingBean.resetQuestion}" update="main-form"/>
 			</h:panelGrid>
 		</h:form>
 	
@@ -39,7 +41,7 @@
 						<f:setPropertyActionListener target="#{questionController.backingBean.question}" value="#{q}" />
 					</p:commandLink>
 					
-					<p:commandLink action="#{questionController.delete}" ajax="true" update="search-results">
+					<p:commandLink action="#{questionController.delete}" ajax="true" update="search-results,messages">
 						<h:graphicImage library="images" name="delete-icon.png" />
 						<f:setPropertyActionListener target="#{questionController.backingBean.question}" value="#{q}" />
 					</p:commandLink>					
@@ -47,7 +49,7 @@
 			</p:dataTable>
 		</h:form>
 	
-	
+		<p:growl showDetail="true" showSummary="true" id="messages"/>
 		<ui:include src="/questionConstructor.xhtml"/>
 		
 	</h:body>
