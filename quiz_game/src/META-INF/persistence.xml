@@ -12,7 +12,10 @@
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/quiz_game"/>
 			<property name="javax.persistence.jdbc.user" value="postgres"/>
+<<<<<<< HEAD
 			<property name="javax.persistence.jdbc.password" value="postgres"/>
+=======
+>>>>>>> b28c40294e1ea48f3070f7847fab932b470aca56
 		</properties>
 	</persistence-unit>
 </persistence>
