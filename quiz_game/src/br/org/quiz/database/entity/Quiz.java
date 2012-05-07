@@ -3,7 +3,9 @@ package br.org.quiz.database.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -16,6 +18,8 @@ public class Quiz implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(allocationSize=1,name="quizSequenceGen",sequenceName="quiz.seq_quiz")
+	@GeneratedValue(generator="quizSequenceGen")
 	@Column(name="id_quiz")
 	private Integer idQuiz;
 
@@ -31,8 +35,12 @@ public class Quiz implements Serializable {
 	@JoinColumn(name="ref_jogador",insertable=false, updatable=false)
 	private Player player;
 
+    @OneToMany(mappedBy="quiz", cascade={CascadeType.PERSIST}, targetEntity=QuestionMapping.class)
+    private List<QuestionMapping> questions;
+    
     public Quiz() {
     	this.dataQuiz = new Date();
+    	this.questions = new ArrayList<QuestionMapping>();
     }
 
 	public Integer getIdQuiz() {
@@ -41,6 +49,16 @@ public class Quiz implements Serializable {
 
 	public void setIdQuiz(Integer idQuiz) {
 		this.idQuiz = idQuiz;
+		//distributeIdOverMappings();
+	}
+
+	private void distributeIdOverMappings() {
+		
+		if(questions != null) {
+			for(QuestionMapping mapping : questions) {
+				mapping.setRefQuiz(idQuiz);
+			}
+		}
 	}
 
 	public Date getDataQuiz() {
@@ -65,6 +83,17 @@ public class Quiz implements Serializable {
 
 	public void setRefJogador(String refJogador) {
 		this.refJogador = refJogador;
+	}
+
+	public List<QuestionMapping> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(List<QuestionMapping> questions) {
+		this.questions = questions;
+		for(QuestionMapping q : questions) {
+			q.setQuiz( this );
+		}
 	}
 	
 	

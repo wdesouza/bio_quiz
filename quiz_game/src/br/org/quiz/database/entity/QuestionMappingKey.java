@@ -12,7 +12,7 @@ public class QuestionMappingKey implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="ref_quiz")
+	@Column(name="ref_quiz",insertable=false,updatable=false)
 	private Integer refQuiz;
 
 	@Column(name="ref_questao")

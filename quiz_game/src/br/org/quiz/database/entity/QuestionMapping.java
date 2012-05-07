@@ -21,11 +21,11 @@ public class QuestionMapping implements Serializable {
 
 	//uni-directional one-to-one association to Quiz
 	@OneToOne
-	@JoinColumn(name="ref_quiz",insertable=false,updatable=false)
+	@JoinColumn(name="ref_quiz")
 	private Quiz quiz;
 
 	//uni-directional one-to-one association to Question
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="ref_questao",insertable=false,updatable=false)
 	private Question question;
 
@@ -63,6 +63,8 @@ public class QuestionMapping implements Serializable {
 
 	public void setQuestion(Question question) {
 		this.question = question;
+		if(question != null)
+			id.setRefQuestao( question.getIdQuestao() );
 	}
 	
 	public Integer getRefQuiz() {
