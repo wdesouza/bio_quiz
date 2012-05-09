@@ -19,12 +19,10 @@ public class QuestionMapping implements Serializable {
 	@Column(name="alternativa_selecionada")
 	private Integer alternativaSelecionada;
 
-	//uni-directional one-to-one association to Quiz
 	@OneToOne
 	@JoinColumn(name="ref_quiz")
 	private Quiz quiz;
 
-	//uni-directional one-to-one association to Question
 	@ManyToOne
 	@JoinColumn(name="ref_questao",insertable=false,updatable=false)
 	private Question question;
@@ -47,6 +45,7 @@ public class QuestionMapping implements Serializable {
 
 	public void setAlternativaSelecionada(Integer alternativaSelecionada) {
 		this.alternativaSelecionada = alternativaSelecionada;
+		System.out.println("Selecionada " + alternativaSelecionada);
 	}
 
 	public Quiz getQuiz() {
@@ -83,4 +82,9 @@ public class QuestionMapping implements Serializable {
 		this.id.setRefQuestao(refQuestao);
 	}
 	
+	public boolean isCorrect() {
+		
+		Integer questionAnswer = question.getAnswer().getIdAlternativa();		
+		return  questionAnswer == this.alternativaSelecionada;
+	}
 }

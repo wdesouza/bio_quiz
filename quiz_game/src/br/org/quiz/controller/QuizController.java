@@ -1,32 +1,43 @@
 package br.org.quiz.controller;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+import br.org.quiz.controller.core.SessionManager;
 import br.org.quiz.database.entity.Player;
 import br.org.quiz.database.entity.Question;
 import br.org.quiz.database.entity.QuestionMapping;
 import br.org.quiz.database.entity.Quiz;
-import br.org.quiz.database.facade.QuestionFacade;
+import br.org.quiz.model.quiz.QuizFactory;
 
 @ManagedBean
 @ViewScoped
 public class QuizController {
 
 	private Quiz quiz;
-	private Iterator<Question> questionsIterator;
-	private Question actualQuestion;
+	private Iterator<QuestionMapping> questionsIterator;
+	private QuestionMapping actualMapping;
+	
 	private Integer questionCount;
-	private QuestionMapping questionMapping;
-	private List<QuestionMapping> questionMappings;
 	private Integer acertosCount;
 
+	public QuizController() {
+		quiz = QuizFactory
+				.buildQuizForAllDatabaseQuestions( 
+						SessionManager.getLoggedPlayer() );
+		questionsIterator = quiz.getQuestions().iterator();
+		
+		questionCount = new Integer(0);
+		acertosCount = new Integer(0);
+		
+		nextQuestion();
+	}
+	
+	
 	public Integer getAcertosCount() {
 		return acertosCount;
 	}
@@ -39,69 +50,36 @@ public class QuizController {
 		this.questionCount = questionCount;
 	}
 
-	public QuestionMapping getQuestionMapping() {
-		return questionMapping;
+	public QuestionMapping getActualMapping() {
+		return actualMapping;
 	}
 
-	public void setQuestionMapping(QuestionMapping questionMapping) {
-		this.questionMapping = questionMapping;
-	}
-
-	public QuizController() {
-		quiz = new Quiz();
-		questionMappings = new ArrayList<QuestionMapping>();
-		questionsIterator = getQuestions();
-		questionCount = new Integer(0);
-		acertosCount = new Integer(0);
-		nextQuestion();
+	public void setActualMapping(QuestionMapping questionMapping) {
+		this.actualMapping = questionMapping;
 	}
 
 	public Question getActualQuestion() {
-		return actualQuestion;
+		return actualMapping.getQuestion();
 	}
 
 	public Integer getQuestionCount() {
 		return questionCount;
 	}
 
-	private Iterator<Question> getQuestions() {
-		QuestionFacade facade = new QuestionFacade();
-		return facade.findQuestionsByDescription("").iterator();
-	}
-
 	public void nextQuestion() {
-		if (questionMapping != null) {
-			questionMappings.add(questionMapping);
+		if (actualMapping != null) {
 			verificarAcerto();
 		}
+		
 		if (questionsIterator.hasNext()) {
-			actualQuestion = questionsIterator.next();
-			questionMapping = new QuestionMapping();
-			questionMapping.setQuestion(actualQuestion);
-			questionMapping.setQuiz(quiz);
+			actualMapping = questionsIterator.next();
 			questionCount++;
-		} else {
-			HttpServletRequest request = (HttpServletRequest) FacesContext
-					.getCurrentInstance().getExternalContext().getRequest();
-			PlayerController attribute = (PlayerController) request
-					.getSession().getAttribute("playerController");
-			Player player = attribute.getPlayer();
-			quiz.setPlayer(player);
 		}
 	}
 
 	private void verificarAcerto() {
-		Integer alternativaCorreta = actualQuestion.getAnswer()
-				.getIdAlternativa();
-		Integer alternativaSelecionada = questionMapping
-				.getAlternativaSelecionada();
-		if (alternativaSelecionada == alternativaCorreta) {
-			acertosCount++;
-		}
-	}
-
-	public void setActualQuestion(Question actualQuestion) {
-		this.actualQuestion = actualQuestion;
+		if (actualMapping.isCorrect()) 
+				acertosCount++;
 	}
 
 	public Quiz getQuiz() {
@@ -111,5 +89,8 @@ public class QuizController {
 	public void setQuiz(Quiz quiz) {
 		this.quiz = quiz;
 	}
-
+	
+	public boolean isLastQuestion() {
+		return ! questionsIterator.hasNext();
+	}
 }
