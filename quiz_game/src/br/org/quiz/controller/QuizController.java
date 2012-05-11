@@ -12,6 +12,7 @@ import br.org.quiz.database.entity.Player;
 import br.org.quiz.database.entity.Question;
 import br.org.quiz.database.entity.QuestionMapping;
 import br.org.quiz.database.entity.Quiz;
+import br.org.quiz.database.facade.QuizFacade;
 import br.org.quiz.model.quiz.QuizFactory;
 
 @ManagedBean
@@ -24,20 +25,26 @@ public class QuizController {
 	
 	private Integer questionCount;
 	private Integer acertosCount;
-
+	private Integer errorsCount;
+	
 	public QuizController() {
 		quiz = QuizFactory
 				.buildQuizForAllDatabaseQuestions( 
 						SessionManager.getLoggedPlayer() );
 		questionsIterator = quiz.getQuestions().iterator();
 		
-		questionCount = new Integer(0);
-		acertosCount = new Integer(0);
-		
+		initCounters();
 		nextQuestion();
 	}
 	
 	
+	private void initCounters() {
+		questionCount = 0;
+		acertosCount = 0;
+		errorsCount = 0;
+	}
+
+
 	public Integer getAcertosCount() {
 		return acertosCount;
 	}
@@ -67,10 +74,7 @@ public class QuizController {
 	}
 
 	public void nextQuestion() {
-		if (actualMapping != null) {
-			verificarAcerto();
-		}
-		
+		verificarAcerto();
 		if (questionsIterator.hasNext()) {
 			actualMapping = questionsIterator.next();
 			questionCount++;
@@ -90,7 +94,20 @@ public class QuizController {
 		this.quiz = quiz;
 	}
 	
+	public Integer getErrorsCount() {
+		return errorsCount;
+	}
+
+	public void setErrorsCount(Integer errorsCount) {
+		this.errorsCount = errorsCount;
+	}
+
 	public boolean isLastQuestion() {
 		return ! questionsIterator.hasNext();
+	}
+	
+	public void finalizeQuiz() {
+		QuizFacade quizFacade = new QuizFacade();
+		quizFacade.insert(quiz);
 	}
 }
