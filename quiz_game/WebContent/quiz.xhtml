@@ -26,11 +26,11 @@
 				</script>
 			</h:head>
 			<body>
-				<p:panel>
-					<h:outputText value="Quantidade questoes: " /><h:outputText value="#{quizController.questionCount}" />
-					<h:outputText value="Questoes acertadas: " /><h:outputText value="#{quizController.acertosCount}" />
-				</p:panel>
 				<h:form id="actualQuestion" >
+					<p:panel>
+						<h:outputText value="Acertos: " /><h:outputText value="#{quizController.acertosCount} / #{quizController.questionCount}" />
+					</p:panel>
+				
 					<p:panel header="Questão #{quizController.questionCount}">
 						<h:outputText value="#{quizController.actualQuestion.descricao}" />
 						<p:dataGrid value="#{quizController.actualQuestion.choices}"
@@ -47,11 +47,35 @@
 						</p:dataGrid>
 					</p:panel>
 					<p:panel style="text-align:right;">
-						<p:commandButton value="Próximo" update="actualQuestion"
-							action="#{quizController.nextQuestion}" rendered="#{!quizController.lastQuestion}"/>
-						<p:commandButton value="Finalizar o jogo!" rendered="#{quizController.lastQuestion}"/>
+						<p:commandButton value="Próximo" update="actualQuestion,messages"
+							action="#{quizController.nextQuestion}" rendered="#{!quizController.lastQuestion}" />
+						<p:commandButton ajax="true" value="Finalizar o jogo!" rendered="#{quizController.lastQuestion}" action="#{quizController.finalizeQuiz}" oncomplete="endDialog.show();" update="actualQuestion"/>
 					</p:panel>
+				
+					<p:dialog widgetVar="endDialog" modal="true" closable="false" draggable="false" resizable="false" width="600" height="300">
+						<p:fieldset legend="Finalizado!">
+							
+							<h:outputText value="Parabéns! " />
+							<h:outputText value="Quantidades de acertos: #{quizController.acertosCount}" />
+							
+							
+							<p:dataTable value="#{quizController.previousScores}" var="q"> 
+							
+								<p:column headerText="Jogador">
+									<h:outputText value="#{q.player.nome}" />
+								</p:column>
+								<p:column headerText="Acertos">
+									<h:outputText value="#{q.score}" />
+								</p:column>
+								
+							</p:dataTable>	
+						</p:fieldset>
+					</p:dialog>
+				
 				</h:form>
+				
+				
+				<p:growl id="messages" showDetail="true" showSummary="true"/>
 			</body>
 		</ui:define>
 	</ui:composition>

@@ -1,12 +1,16 @@
 package br.org.quiz.controller;
 
 import java.util.Iterator;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.common.base.Preconditions;
+
+import br.org.quiz.controller.core.MessageDeliver;
 import br.org.quiz.controller.core.SessionManager;
 import br.org.quiz.database.entity.Player;
 import br.org.quiz.database.entity.Question;
@@ -22,6 +26,10 @@ public class QuizController {
 	private Quiz quiz;
 	private Iterator<QuestionMapping> questionsIterator;
 	private QuestionMapping actualMapping;
+	private QuizFacade quizFacade;
+		
+	
+	private List<Quiz> previousScores;
 	
 	private Integer questionCount;
 	private Integer acertosCount;
@@ -32,14 +40,17 @@ public class QuizController {
 				.buildQuizForAllDatabaseQuestions( 
 						SessionManager.getLoggedPlayer() );
 		questionsIterator = quiz.getQuestions().iterator();
-		
+		quizFacade = new QuizFacade();
 		initCounters();
-		nextQuestion();
+		advance();
 	}
 	
+	private void advance() {
+		actualMapping = questionsIterator.next();
+	}
 	
 	private void initCounters() {
-		questionCount = 0;
+		questionCount = quiz.getQuestions().size();
 		acertosCount = 0;
 		errorsCount = 0;
 	}
@@ -74,16 +85,29 @@ public class QuizController {
 	}
 
 	public void nextQuestion() {
-		verificarAcerto();
-		if (questionsIterator.hasNext()) {
-			actualMapping = questionsIterator.next();
-			questionCount++;
-		}
+		try {
+			verifyChoiceSelection();
+			verificarAcerto();
+			advance();
+		} catch(IllegalArgumentException e) {
+			MessageDeliver.addErrorMessage("", e.getMessage());
+		} 
+	}
+
+	private void verifyChoiceSelection() {
+		Preconditions.checkArgument(actualMapping.getAlternativaSelecionada() != null
+									, "Selecione ao menos uma alternativa!");
 	}
 
 	private void verificarAcerto() {
-		if (actualMapping.isCorrect()) 
+		if (actualMapping.isCorrect()) {
 				acertosCount++;
+				MessageDeliver.addSuccessMessage("Acertou!", "");
+		} else {
+			MessageDeliver.addErrorMessage("Você errou ...", "");
+			errorsCount++;
+		}
+		
 	}
 
 	public Quiz getQuiz() {
@@ -107,7 +131,11 @@ public class QuizController {
 	}
 	
 	public void finalizeQuiz() {
-		QuizFacade quizFacade = new QuizFacade();
 		quizFacade.insert(quiz);
+		previousScores = quizFacade.retrieveGamesScoreOrdered();
+	}
+
+	public List<Quiz> getPreviousScores() {
+		return previousScores;
 	}
 }

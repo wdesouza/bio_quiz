@@ -73,10 +73,11 @@ public class TestQuestionPersistence {
 	private Question mockQuestion() {
 
 		Question question = new Question();
-		question.setDescricao("Qual é o sentido da vida?");
-		question.addChoice(mockChoice(true, 1));
+		question.setDescricao("Se o pinóquio falar que seu nariz vai crescer, o que acontece?");
+		
+		question.addChoice(mockChoice(false, 1));
 		question.addChoice(mockChoice(false, 2));
-		question.addChoice(mockChoice(false, 3));
+		question.addChoice(mockChoice(true, 3));
 		question.addChoice(mockChoice(false, 4));
 		question.addChoice(mockChoice(false, 5));
 
@@ -87,7 +88,7 @@ public class TestQuestionPersistence {
 
 		Choice c = new Choice();
 		c.setVerdade(isTrue ? 1 : 0);
-		c.setDescricao("Alternativa " + sequence);
+		c.setDescricao( isTrue ? "Correta" : "Errada, não assinale!");
 		return c;
 	}
 

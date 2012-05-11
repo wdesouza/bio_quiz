@@ -1,6 +1,8 @@
 package br.org.quiz.database.entity;
 
 import java.io.Serializable;
+
+import javax.inject.Named;
 import javax.persistence.*;
 
 import java.util.ArrayList;
@@ -14,6 +16,9 @@ import java.util.List;
  */
 @Entity
 @Table(name="quiz",schema="quiz")
+@NamedQueries({
+	@NamedQuery(name="Quiz.search",query="SELECT q FROM Quiz q")
+})
 public class Quiz implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -37,6 +42,7 @@ public class Quiz implements Serializable {
 
     @OneToMany(mappedBy="quiz", cascade={CascadeType.PERSIST}, targetEntity=QuestionMapping.class)
     private List<QuestionMapping> questions;
+    
     
     public Quiz() {
     	this.dataQuiz = new Date();
@@ -75,6 +81,8 @@ public class Quiz implements Serializable {
 
 	public void setPlayer(Player player) {
 		this.player = player;
+		if(player != null)
+			this.refJogador = player.getEmail();
 	}
 
 	public String getRefJogador() {
@@ -96,6 +104,19 @@ public class Quiz implements Serializable {
 		}
 	}
 	
-	
+	/**
+	 * Retorna a quantidade de acertos de um quiz
+	 * @return
+	 */
+	public int getScore() {
+		
+		int score = 0;
+		for(QuestionMapping q : questions) {
+			if(q.isCorrect())
+				score++;
+		}
+		
+		return score;
+	}
 	
 }
