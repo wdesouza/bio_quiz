@@ -34,6 +34,7 @@ public class PlayerController {
 
 	private PlayerFacade facade;
 
+	
 	public PlayerController() {
 		player = new Player();
 		facade = new PlayerFacade();
