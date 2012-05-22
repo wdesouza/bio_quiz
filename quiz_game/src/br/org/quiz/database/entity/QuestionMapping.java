@@ -104,6 +104,6 @@ public class QuestionMapping implements Serializable {
 	public boolean isCorrect() {
 		
 		Integer questionAnswer = question.getAnswer().getIdAlternativa();		
-		return  questionAnswer == this.alternativaSelecionada;
+		return  questionAnswer.equals(this.alternativaSelecionada);
 	}
 }

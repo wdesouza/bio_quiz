@@ -53,6 +53,7 @@ CREATE TABLE quiz.quiz (
   id_quiz INTEGER NOT NULL ,
   ref_jogador CHARACTER VARYING(100) NOT NULL ,
   data_quiz DATE NOT NULL ,
+  tempo INTEGER NOT NULL, 
   PRIMARY KEY (id_quiz) ,
   CONSTRAINT fk_quiz_jogador1
     FOREIGN KEY (ref_jogador )

@@ -49,28 +49,8 @@
 					<p:panel style="text-align:right;">
 						<p:commandButton value="Próximo" update="actualQuestion,messages"
 							action="#{quizController.nextQuestion}" rendered="#{!quizController.lastQuestion}" />
-						<p:commandButton ajax="true" value="Finalizar o jogo!" rendered="#{quizController.lastQuestion}" action="#{quizController.finalizeQuiz}" oncomplete="endDialog.show();" update="actualQuestion"/>
+						<p:commandButton ajax="false" value="Finalizar o jogo!" rendered="#{quizController.lastQuestion}" action="#{quizController.finalizeQuiz}" />
 					</p:panel>
-				
-					<p:dialog widgetVar="endDialog" modal="true" closable="false" draggable="false" resizable="false" width="600" height="300">
-						<p:fieldset legend="Finalizado!">
-							
-							<h:outputText value="Parabéns! " />
-							<h:outputText value="Quantidades de acertos: #{quizController.acertosCount}" />
-							
-							
-							<p:dataTable value="#{quizController.previousScores}" var="q"> 
-							
-								<p:column headerText="Jogador">
-									<h:outputText value="#{q.player.nome}" />
-								</p:column>
-								<p:column headerText="Acertos">
-									<h:outputText value="#{q.score}" />
-								</p:column>
-								
-							</p:dataTable>	
-						</p:fieldset>
-					</p:dialog>
 				
 				</h:form>
 				
