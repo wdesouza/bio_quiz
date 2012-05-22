@@ -6,10 +6,18 @@
    PATH="/index.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="SUCCESS::#quiz.xhtml" NAME="output"
     PATH="/quiz.xhtml" TARGET="rules:#quiz.xhtml" TITLE="SUCCESS" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID=":SHOW_SCORE:#score.xhtml" NAME="output1"
+    PATH="/score.xhtml" TARGET="rules:#score.xhtml"
+    TITLE="SHOW_SCORE:[any]" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#quiz.xhtml" PATH="/quiz.xhtml"
-  SHAPE="160,256,50,25" model-entity="JSFProcessGroup" persistent="true"/>
+  SHAPE="240,216,50,41" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#quiz.xhtml:0" NAME="item" PATH="/quiz.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="SHOW_SCORE::#score.xhtml" NAME="output"
+    PATH="/score.xhtml" TARGET="rules:#score.xhtml" TITLE="SHOW_SCORE" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#questions.xhtml" PATH="/questions.xhtml"
   SHAPE="550,183,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#questions.xhtml:0" NAME="item"
@@ -19,4 +27,8 @@
     TITLE="SUCCESS" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*" PATH="*" SHAPE="368,48,53,26"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#score.xhtml" PATH="/score.xhtml"
+  SHAPE="32,224,50,25" model-entity="JSFProcessGroup" persistent="true"/>
 </PROCESS>

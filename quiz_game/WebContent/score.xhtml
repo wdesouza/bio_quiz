@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.prime.com.tr/ui"> 
+
+
+	<ui:composition template="/template.xhtml">
+		<ui:define name="body">
+			
+			<h:form>
+			<div class="score-text">
+			<h:outputText value="PONTUAÇÃO"/>
+			</div>
+			<p:dataTable value="#{scoreController.fullScore}" var="s" paginator="true" rows="10" styleClass="score-table">
+			
+				<p:column headerText="Jogador" sortBy="#{s.player.nome}" >
+					<h:outputText value="#{s.player.nome}" styleClass="#{s.player.email == scoreController.sessionMail ? 'score-logged' : 'none'}"/>
+				</p:column>
+				
+				<p:column headerText="Acertos" sortBy="#{s.score}">
+					<h:outputText value="#{s.score} / #{s.totalOfQuestions}" styleClass="#{s.player.email == scoreController.sessionMail ? 'score-logged' : 'none'}"/>
+				</p:column>
+				
+				<p:column headerText="Data do jogo" sortBy="#{s.dataQuiz}" >
+					<h:outputText value="#{s.dataQuiz}" styleClass="#{s.player.email == scoreController.sessionMail ? 'score-logged' : 'none'}">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+				</p:column>
+				
+				
+				
+				
+			</p:dataTable>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</html>

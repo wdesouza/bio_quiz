@@ -20,5 +20,20 @@
 package br.org.quiz.controller.core;
 
 public enum EnumAction {
-	SUCCESS, ERROR;
+	SUCCESS, ERROR, SHOW_SCORE;
+	
+	@Override
+	public String toString() {
+		
+		switch (this) {
+		case SHOW_SCORE:
+			return "SHOW_SCORE";
+		case ERROR:
+			return "ERROR";
+		case SUCCESS:
+			return "SUCCESS";
+		default:
+			return "";
+		}
+	}
 }
