@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.google.common.base.Preconditions;
 
+import br.org.quiz.controller.core.EnumAction;
 import br.org.quiz.controller.core.MessageDeliver;
 import br.org.quiz.controller.core.SessionManager;
 import br.org.quiz.database.entity.Player;
@@ -46,9 +47,6 @@ public class QuizController {
 	private Iterator<QuestionMapping> questionsIterator;
 	private QuestionMapping actualMapping;
 	private QuizFacade quizFacade;
-		
-	
-	private List<Quiz> previousScores;
 	
 	private Integer questionCount;
 	private Integer acertosCount;
@@ -149,12 +147,9 @@ public class QuizController {
 		return ! questionsIterator.hasNext();
 	}
 	
-	public void finalizeQuiz() {
+	public String finalizeQuiz() {
 		quizFacade.insert(quiz);
-		previousScores = quizFacade.retrieveGamesScoreOrdered();
+		return "SHOW_SCORE";
 	}
 
-	public List<Quiz> getPreviousScores() {
-		return previousScores;
-	}
 }

@@ -59,7 +59,7 @@ public class Quiz implements Serializable {
 	@JoinColumn(name="ref_jogador",insertable=false, updatable=false)
 	private Player player;
 
-    @OneToMany(mappedBy="quiz", cascade={CascadeType.PERSIST}, targetEntity=QuestionMapping.class)
+    @OneToMany(mappedBy="quiz", cascade={CascadeType.PERSIST}, targetEntity=QuestionMapping.class,fetch=FetchType.EAGER)
     private List<QuestionMapping> questions;
     
     
@@ -116,6 +116,10 @@ public class Quiz implements Serializable {
 		return questions;
 	}
 
+	public int getTotalOfQuestions() {
+		return this.questions.size();
+	}
+	
 	public void setQuestions(List<QuestionMapping> questions) {
 		this.questions = questions;
 		for(QuestionMapping q : questions) {
