@@ -22,9 +22,13 @@ package br.org.quiz.controller;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import com.google.common.base.Preconditions;
+
 import br.org.quiz.controller.core.EnumAction;
+import br.org.quiz.controller.core.MessageDeliver;
 import br.org.quiz.database.entity.Player;
 import br.org.quiz.database.facade.PlayerFacade;
+import br.org.quiz.model.util.MailValidator;
 
 @ManagedBean
 @SessionScoped
@@ -41,12 +45,17 @@ public class PlayerController {
 
 	public EnumAction play() {
 		try {
+			Preconditions.checkArgument(MailValidator.validMail(player.getEmail())
+									   ,"O email parece ser inválido ...");		
+			
 			boolean exists = facade.playerExists(player);
 			if (!exists) {
 				facade.insert(player);
 			}
 			return EnumAction.SUCCESS;
 		} catch (Exception e) {
+			MessageDeliver
+				.addErrorMessage(e.getMessage());
 			return EnumAction.ERROR;
 		}
 	}

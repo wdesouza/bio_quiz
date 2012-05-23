@@ -29,15 +29,24 @@ public class SessionManager {
 
 	public static Player getLoggedPlayer() {
 		
+		return getSessionPlayerController().getPlayer();
+	}
+	
+	
+	private static PlayerController getSessionPlayerController() {
 		PlayerController controller;
 		controller = (PlayerController) currentRequest()
 											.getSession()
 											.getAttribute("playerController");
-		return controller.getPlayer();
+		return controller;
 	}
 	
 	public static boolean playerIsLogged() {
-		return getLoggedPlayer().getEmail() != null;
+		
+		PlayerController controller = getSessionPlayerController();
+		if(controller == null) 
+				return false;
+		return controller.getPlayer().getEmail() != null;
 	}
 	
 	private static HttpServletRequest currentRequest() {
