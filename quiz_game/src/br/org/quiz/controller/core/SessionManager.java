@@ -36,6 +36,10 @@ public class SessionManager {
 		return controller.getPlayer();
 	}
 	
+	public static boolean playerIsLogged() {
+		return getLoggedPlayer().getEmail() != null;
+	}
+	
 	private static HttpServletRequest currentRequest() {
 		return (HttpServletRequest) FacesContext
 										.getCurrentInstance()
