@@ -30,7 +30,8 @@ body {
 .logo-text {
 	font-size: 70px;
 	color: green;
-	margin-bottom: 20px;
+	margin:auto;
+	margin-bottom: 30px;
 	margin-top: 10px;
 	font-family: sans-serif;
 	text-align: center;
@@ -76,4 +77,11 @@ body {
 	color: orange;
 	margin-top: 55px;
 	text-align: center;
+}
+
+.score-link {
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: 12px;
+	text-decoration: none;
 }

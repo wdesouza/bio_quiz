@@ -1,9 +1,4 @@
-﻿DROP TABLE IF EXISTS quiz.quiz_questao;
-DROP TABLE IF EXISTS quiz.quiz;
-DROP TABLE IF EXISTS quiz.jogador;
-DROP TABLE IF EXISTS quiz.alternativa;
-DROP TABLE IF EXISTS quiz.questao;
-DROP SCHEMA IF EXISTS quiz;
+﻿DROP SCHEMA quiz CASCADE;
 
 CREATE SCHEMA quiz;
 
@@ -53,7 +48,7 @@ CREATE TABLE quiz.quiz (
   id_quiz INTEGER NOT NULL ,
   ref_jogador CHARACTER VARYING(100) NOT NULL ,
   data_quiz DATE NOT NULL ,
-  tempo INTEGER NOT NULL, 
+  tempo double precision NOT NULL, 
   PRIMARY KEY (id_quiz) ,
   CONSTRAINT fk_quiz_jogador1
     FOREIGN KEY (ref_jogador )

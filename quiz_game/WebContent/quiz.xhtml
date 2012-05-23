@@ -9,13 +9,13 @@
 	<ui:composition template="/template.xhtml">
 		<ui:define name="body">
 			<h:head>
-			
+
 				<style>
-				.choice-link {
-					padding: 10px;
-					width: 90%;
-				}
-				</style>
+.choice-link {
+	padding: 10px;
+	width: 90%;
+}
+</style>
 				<script type="text/javascript">
 					function modifyClass(button) {
 						jQuery(function($){
@@ -26,36 +26,40 @@
 				</script>
 			</h:head>
 			<body>
-				<h:form id="actualQuestion" >
+				<h:form id="actualQuestion">
 					<p:panel>
-						<h:outputText value="Acertos: " /><h:outputText value="#{quizController.acertosCount} / #{quizController.questionCount}" />
+						<div style="padding-left: #{quizController.acertosCount * 10}%;height:200px;">
+							<p style="margin-top: 50px;">
+								<h:graphicImage library="images"
+									name="#{quizController.acertosCount}.png" />
+							</p>
+						</div>
 					</p:panel>
-				
 					<p:panel header="Questão #{quizController.questionCount}">
 						<h:outputText value="#{quizController.actualQuestion.descricao}" />
 						<p:dataGrid value="#{quizController.actualQuestion.choices}"
 							var="choice" columns="1">
 							<p:column>
-								<p:commandLink ajax="true" value="#{choice.descricao}" styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only choice-link" onclick="modifyClass(this);" >
+								<p:commandLink ajax="true" value="#{choice.descricao}"
+									styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only choice-link"
+									onclick="modifyClass(this);">
 									<f:setPropertyActionListener
 										target="#{quizController.actualMapping.alternativaSelecionada}"
 										value="#{choice.idAlternativa}" />
 								</p:commandLink>
-								
-								
 							</p:column>
 						</p:dataGrid>
 					</p:panel>
 					<p:panel style="text-align:right;">
 						<p:commandButton value="Próximo" update="actualQuestion,messages"
-							action="#{quizController.nextQuestion}" rendered="#{!quizController.lastQuestion}" />
-						<p:commandButton ajax="false" value="Finalizar o jogo!" rendered="#{quizController.lastQuestion}" action="#{quizController.finalizeQuiz}" />
+							action="#{quizController.nextQuestion}"
+							rendered="#{!quizController.lastQuestion}" />
+						<p:commandButton ajax="false" value="Finalizar o jogo!"
+							rendered="#{quizController.lastQuestion}"
+							action="#{quizController.finalizeQuiz}" />
 					</p:panel>
-				
 				</h:form>
-				
-				
-				<p:growl id="messages" showDetail="true" showSummary="true"/>
+				<p:growl id="messages" showDetail="true" showSummary="true" />
 			</body>
 		</ui:define>
 	</ui:composition>
