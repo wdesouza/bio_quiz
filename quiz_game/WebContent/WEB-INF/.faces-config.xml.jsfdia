@@ -30,5 +30,11 @@
  <PROCESS-ITEM NAME="rules:*" PATH="*" SHAPE="368,48,53,26"
   model-entity="JSFProcessGroup" persistent="true"/>
  <PROCESS-ITEM NAME="rules:#score.xhtml" PATH="/score.xhtml"
-  SHAPE="32,224,50,25" model-entity="JSFProcessGroup" persistent="true"/>
+  SHAPE="32,224,50,25" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#score.xhtml:0" NAME="item"
+   PATH="/score.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID=":home:#index.xhtml" NAME="output"
+    PATH="/index.xhtml" TARGET="rules:#index.xhtml" TITLE="home:[any]" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
 </PROCESS>

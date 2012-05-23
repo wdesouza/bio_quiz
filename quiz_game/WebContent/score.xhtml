@@ -13,14 +13,19 @@
 			<div class="score-text">
 			<h:outputText value="PONTUAÇÃO"/>
 			</div>
-			<p:dataTable value="#{scoreController.fullScore}" var="s" paginator="true" rows="10" styleClass="score-table">
+			<p:dataTable value="#{scoreController.fullScore}" var="s" paginator="true" rows="40" styleClass="score-table" emptyMessage="Que pena ... ninguém jogou ainda ...">
 			
 				<p:column headerText="Jogador" sortBy="#{s.player.nome}" >
 					<h:outputText value="#{s.player.nome}" styleClass="#{s.player.email == scoreController.sessionMail ? 'score-logged' : 'none'}"/>
 				</p:column>
 				
-				<p:column headerText="Acertos" sortBy="#{s.score}">
-					<h:outputText value="#{s.score} / #{s.totalOfQuestions}" styleClass="#{s.player.email == scoreController.sessionMail ? 'score-logged' : 'none'}"/>
+				<p:column style="text-align:center;" headerText="Acertos" sortBy="#{s.score}">
+					<!-- <h:outputText value="#{s.score} / #{s.totalOfQuestions}" styleClass="#{s.player.email == scoreController.sessionMail ? 'score-logged' : 'none'}"/>  -->
+					<h:graphicImage library="images" name="#{s.score}.png" width="50" />
+				</p:column>
+				
+				<p:column headerText="Tempo" sortBy="#{s.score}">
+					<h:outputText value="#{s.tempo} segs." styleClass="#{s.player.email == scoreController.sessionMail ? 'score-logged' : 'none'}"/>
 				</p:column>
 				
 				<p:column headerText="Data do jogo" sortBy="#{s.dataQuiz}" >
@@ -34,6 +39,11 @@
 				
 			</p:dataTable>
 			</h:form>
+			<div style="text-align:right;" class="score-table">
+				<h:form>
+					<p:commandButton ajax='false' value="Início" style="width:250px;" action="home"/>
+				</h:form>
+			</div>
 		</ui:define>
 	</ui:composition>
 </html>

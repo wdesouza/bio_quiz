@@ -8,65 +8,117 @@
 	<ui:composition template="/template.xhtml">
 		<ui:define name="body">
 			<body style="background-color: #FAFAF4">
+				<!-- 
 		<p:fieldset legend="Bem vindo!" styleClass="about-app">
 				Quiz game é um projeto idealizado por 
 				(nome das girls) do (tal) período. Consiste em várias
 				perguntas sobre a sua área preferida (qual será?) e com
-				certeza te ajudará a aprender mais! Divirta-se!
-		</p:fieldset>
+				certeza te ajudará a aprender mais! Divirta-se!<br/><br/>
+		</p:fieldset>  -->
 				<h:form>
 					<p:panel styleClass="login-panel">
-						<h:panelGrid columns="1" columnClasses="centered" style="margin:auto;width:90%;">
-							<h:outputLabel value="Nome" styleClass="bold"/>
+						<h:panelGrid columns="1" columnClasses="centered"
+							style="margin:auto;width:90%;">
+							<h:outputLabel value="Nome" styleClass="bold" />
 							<p:inputText required="true"
-								value="#{playerController.player.nome}" id="player-name" requiredMessage="Seu nome por favor!" style="width:100%;">
-								<p:watermark value="Como se chama?" for="player-name"/>
-							</p:inputText>	
-							<h:outputLabel value="Email" styleClass="bold"/>
+								value="#{playerController.player.nome}" id="player-name"
+								requiredMessage="Seu nome por favor!" style="width:100%;">
+								<p:watermark value="Como se chama?" for="player-name" />
+							</p:inputText>
+							<h:outputLabel value="Email" styleClass="bold" />
 							<p:inputText required="true"
-								value="#{playerController.player.email}" id="player-mail"  requiredMessage="Nos informe seu email, é confidencial!" style="width:100%;">
-								<p:watermark value="Gmail? Msn? ICQ?" for="player-mail"/>
-							</p:inputText>	
+								value="#{playerController.player.email}" id="player-mail"
+								requiredMessage="Nos informe seu email, é confidencial!"
+								style="width:100%;">
+								<p:watermark value="Gmail? Msn? ICQ?" for="player-mail" />
+							</p:inputText>
 						</h:panelGrid>
-						<br/>
-						<div align="center"> 	
-							<p:commandButton ajax="false" value="Jogar"
-								style="margin:auto;" action="#{playerController.play}" />
+						<br />
+						<div align="center">
+							<p:commandButton ajax="false" value="Jogar" style="margin:auto;"
+								action="#{playerController.play}" />
 						</div>
 					</p:panel>
 				</h:form>
-				<h:form>	
-					<p:panel style="margin:auto;border:none;width:15em;text-align:center;">
-						<p:commandLink ajax="false" value="Tela de Pontuação" action="SHOW_SCORE" />
+				<h:form>
+					<p:panel
+						style="margin:auto;border:none;width:15em;text-align:center;margin-top:15px;">
+						<p:commandLink ajax="false" value="Tela de Pontuação"
+							action="SHOW_SCORE" />
 					</p:panel>
-						<p:commandButton oncomplete="developersDlg.show();" value="Nos conheça!" styleClass="about-us" style="position:absolute;bottom:25px;left:20px;" ajax="true"/>
+					<p:commandButton oncomplete="developersDlg.show();" value="Equipe"
+						styleClass="about-us"
+						style="position:absolute;bottom:25px;left:20px;" ajax="true" />
 					<!-- <p:panel
 						style="position:absolute;bottom:0px;right:0px;border:none;">
 						<p:commandLink ajax="false" value="Administração" />
 					</p:panel> -->
-					<p:dialog widgetVar="developersDlg" modal="true" closable="true" resizable="false" width="350">
-				
+					<p:dialog widgetVar="developersDlg" modal="true" closable="true"
+						resizable="false" width="900">
+						<p:fieldset legend="Idealizadores">
+							<h:panelGrid columns="3">
+								<h:panelGrid columns="2">
+									<h:graphicImage library="images" name="lito.jpg" />
+									<p class="about-developer">
+										<span class="bold"> Wélliton de Souza: </span>trabalha com
+										desenvolvimento de sistemas para análise de sequencias
+										genéticas na UNESP - Rio Claro-SP. Atualmente cursando o
+										último ano de Bacharelado em Sistemas de Informação na
+										Fundação Hermínio Ometto - UNIARARAS
+									</p>
+								</h:panelGrid>
+								<h:panelGrid columns="2">
+									<h:graphicImage library="images" name="lito.jpg" />
+									<p class="about-developer">
+										<span class="bold"> Wélliton de Souza: </span>trabalha com
+										desenvolvimento de sistemas para análise de sequencias
+										genéticas na UNESP - Rio Claro-SP. Atualmente cursando o
+										último ano de Bacharelado em Sistemas de Informação na
+										Fundação Hermínio Ometto - UNIARARAS
+									</p>
+								</h:panelGrid>
+								<h:panelGrid columns="2">
+									<h:graphicImage library="images" name="lito.jpg" />
+									<p class="about-developer">
+										<span class="bold"> Wélliton de Souza: </span>trabalha com
+										desenvolvimento de sistemas para análise de sequencias
+										genéticas na UNESP - Rio Claro-SP. Atualmente cursando o
+										último ano de Bacharelado em Sistemas de Informação na
+										Fundação Hermínio Ometto - UNIARARAS
+									</p>
+								</h:panelGrid>
+							</h:panelGrid>
+						</p:fieldset>
 						<p:fieldset legend="Desenvolvedores">
-							
-							<h:graphicImage library="images" name="lito.jpg" />
-							<p class="about-developer">
-								<span class="bold"> Wélliton de Souza: </span>trabalha com desenvolvimento de sistemas para análise de sequencias genéticas na UNESP
-								- 	Rio Claro. Atualmente cursando o último ano de Bacharelado em Sistemas de Informação na Fundação Hermínio Ometto - UNIARARAS  
-							</p>
-							
-							<h:graphicImage library="images" name="matheus.jpg" />
-							<p class="about-developer">
-								<span class="bold">Matheus Binotto: </span> trabalha como programador Java EE e Web, com sistemas de notas fiscais eletrônicas e corporativos 
-								na varitus BRASIL em Araras-SP. Também no último ano do curso
-								de Bacharelado em Sistemas na Fundação Hermínio Ometto - UNIARARAS. 
-							</p>
-							
+
+							<h:panelGrid columns="2">
+								<h:panelGrid columns="2">
+									<h:graphicImage library="images" name="lito.jpg" />
+									<p class="about-developer">
+										<span class="bold"> Wélliton de Souza: </span>trabalha com
+										desenvolvimento de sistemas para análise de sequencias
+										genéticas na UNESP - Rio Claro-SP. Atualmente cursando o
+										último ano de Bacharelado em Sistemas de Informação na
+										Fundação Hermínio Ometto - UNIARARAS
+									</p>
+								</h:panelGrid>
+								<h:panelGrid columns="2">
+									<h:graphicImage library="images" name="matheus.jpg" />
+									<p class="about-developer">
+										<span class="bold">Matheus Binotto: </span> trabalha como
+										desenvolvedor Java EE e Web, com sistemas de notas fiscais
+										eletrônicas e corporativos na Varitus BRASIL em Araras-SP.
+										Também no último ano do curso de Bacharelado em Sistemas na
+										Fundação Hermínio Ometto - UNIARARAS.
+									</p>
+								</h:panelGrid>
+							</h:panelGrid>
 						</p:fieldset>
 					</p:dialog>
-				</h:form>	
-				<p:growl showDetail="true" showSummary="false"/>
-				
-				
+				</h:form>
+				<p:growl showDetail="true" showSummary="false" />
+
+
 			</body>
 		</ui:define>
 	</ui:composition>

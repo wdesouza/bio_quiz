@@ -54,6 +54,9 @@ public class Quiz implements Serializable {
     @Column(name="ref_jogador")
     private String refJogador;
     
+    @Column(name="tempo")
+    private double tempo;
+    
 	//bi-directional many-to-one association to Player
     @ManyToOne
 	@JoinColumn(name="ref_jogador",insertable=false, updatable=false)
@@ -120,6 +123,16 @@ public class Quiz implements Serializable {
 		return this.questions.size();
 	}
 	
+	
+	
+	public double getTempo() {
+		return tempo;
+	}
+
+	public void setTempo(double tempo) {
+		this.tempo = tempo;
+	}
+
 	public void setQuestions(List<QuestionMapping> questions) {
 		this.questions = questions;
 		for(QuestionMapping q : questions) {
