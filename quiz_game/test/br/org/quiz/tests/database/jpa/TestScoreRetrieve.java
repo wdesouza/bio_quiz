@@ -20,7 +20,7 @@ public class TestScoreRetrieve {
 		Assert.assertFalse("Não ha quiz cadastrado.", score.isEmpty());
 		for(Quiz q : score) {
 			Assert.assertFalse("Não foram trazidas as questoes do quiz juntamente com ele.", q.getQuestions().isEmpty());
-			System.out.println(q.getScore());
+			System.out.println(q.getScore() + " t: " + q.getTempo());
 		}
 	}
 }

@@ -38,6 +38,7 @@ import br.org.quiz.database.entity.QuestionMapping;
 import br.org.quiz.database.entity.Quiz;
 import br.org.quiz.database.facade.QuizFacade;
 import br.org.quiz.model.quiz.QuizFactory;
+import br.org.quiz.model.quiz.Timer;
 
 @ManagedBean
 @ViewScoped
@@ -52,6 +53,8 @@ public class QuizController {
 	private Integer acertosCount;
 	private Integer errorsCount;
 	
+	private Timer timer;
+	
 	public QuizController() {
 		quiz = QuizFactory
 				.buildQuizForAllDatabaseQuestions( 
@@ -59,6 +62,7 @@ public class QuizController {
 		questionsIterator = quiz.getQuestions().iterator();
 		quizFacade = new QuizFacade();
 		initCounters();
+		timer = new Timer(true);		
 		advance();
 	}
 	
@@ -148,6 +152,9 @@ public class QuizController {
 	}
 	
 	public String finalizeQuiz() {
+		
+		timer.stop();
+		quiz.setTempo( timer.elapsedSeconds() );
 		quizFacade.insert(quiz);
 		return "SHOW_SCORE";
 	}

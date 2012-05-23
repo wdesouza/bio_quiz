@@ -27,8 +27,14 @@ public class QuizScoreComparator implements Comparator<Quiz>{
 
 	@Override
 	public int compare(Quiz quiz1, Quiz quiz2) {
+		
+		
 		if(quiz1.getScore() > quiz2.getScore()) return -1;
 		else if(quiz1.getScore() < quiz2.getScore()) return 1;
+		
+		if(quiz1.getTempo() < quiz2.getTempo()) return -1;
+		else if(quiz1.getTempo() > quiz2.getTempo()) return 1;
+		
 		return 0;
 	}
 
