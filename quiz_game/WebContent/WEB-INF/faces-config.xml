@@ -34,4 +34,7 @@
    <to-view-id>/index.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>
+ <lifecycle>
+  <phase-listener>br.org.quiz.controller.core.QuizPhaseListener</phase-listener>
+ </lifecycle>
 </faces-config>
