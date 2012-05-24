@@ -20,25 +20,20 @@
 package br.org.quiz.controller;
 
 import java.util.Iterator;
-import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 
-import com.google.common.base.Preconditions;
-
-import br.org.quiz.controller.core.EnumAction;
 import br.org.quiz.controller.core.MessageDeliver;
 import br.org.quiz.controller.core.SessionManager;
-import br.org.quiz.database.entity.Player;
 import br.org.quiz.database.entity.Question;
 import br.org.quiz.database.entity.QuestionMapping;
 import br.org.quiz.database.entity.Quiz;
 import br.org.quiz.database.facade.QuizFacade;
 import br.org.quiz.model.quiz.QuizFactory;
 import br.org.quiz.model.quiz.Timer;
+
+import com.google.common.base.Preconditions;
 
 @ManagedBean
 @ViewScoped
@@ -50,6 +45,7 @@ public class QuizController {
 	private QuizFacade quizFacade;
 	
 	private Integer questionCount;
+	private Integer actualQuestionNumber;
 	private Integer acertosCount;
 	private Integer errorsCount;
 	
@@ -67,6 +63,7 @@ public class QuizController {
 	}
 	
 	private void advance() {
+		actualQuestionNumber += 1;
 		actualMapping = questionsIterator.next();
 	}
 	
@@ -74,6 +71,7 @@ public class QuizController {
 		questionCount = quiz.getQuestions().size();
 		acertosCount = 0;
 		errorsCount = 0;
+		actualQuestionNumber = -1;
 	}
 
 
@@ -157,6 +155,14 @@ public class QuizController {
 		quiz.setTempo( timer.elapsedSeconds() );
 		quizFacade.insert(quiz);
 		return "SHOW_SCORE";
+	}
+
+	public Integer getActualQuestionNumber() {
+		return actualQuestionNumber;
+	}
+
+	public void setActualQuestionNumber(Integer actualQuestionNumber) {
+		this.actualQuestionNumber = actualQuestionNumber;
 	}
 
 }

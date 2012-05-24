@@ -28,15 +28,15 @@
 			<body>
 				<h:form id="actualQuestion">
 					<p:panel>
-						<div style="padding-left: #{quizController.acertosCount * 10}%;height:200px;">
+						<div style="padding-left: #{quizController.actualQuestionNumber * 10}%;height:200px;">
 							<p style="margin-top: 50px;">
 								<h:graphicImage library="images"
-									name="#{quizController.acertosCount}.png" />
+									name="#{quizController.acertosCount}_t.png" />
 							</p>
 						</div>
 					</p:panel>
-					<p:panel header="Questão #{quizController.questionCount}">
-						<h:outputText value="#{quizController.actualQuestion.descricao}" />
+					<p:panel header="Questão #{quizController.actualQuestionNumber}">
+						<h:outputText value="#{quizController.actualQuestion.descricao}" escape="false" />
 						<p:dataGrid value="#{quizController.actualQuestion.choices}"
 							var="choice" columns="1">
 							<p:column>
