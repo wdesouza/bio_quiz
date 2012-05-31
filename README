@@ -1,0 +1,3 @@
+BioQuiz: jogo de questionario com progressão visual e tabela de pontuação.
+Projeto desenvolvido em conjunto com o grupo de alunos do curso de Biologia da UNIARARAS.
+Desenvolvido em Java, utiliza as tecnologias JPA e JSF (PrimeFaces). Utiliza o PostgreSQL para persistência das informações.
